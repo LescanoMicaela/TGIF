@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+
+    </head>
+
+    <body>
+      <nav class="navbar navbar-inverse" >
+          <div class="container-fluid">
+
+              <ul class="nav navbar-nav">
+                  <li class="active"><a class="activea" href="index.html">Home</a></li>
+                  <li class="dropdown">
+                      <a class="dropdown-toggle" data-toggle="dropdown" href="#">Congress 113
+            <span class="caret"></span></a>
+                      <ul class="dropdown-menu">
+                          <li><a href="senate-data.html">Senate</a></li>
+                          <li><a href="house-data.html">House</a></li>
+                      </ul>
+                  </li>
+                  <li class="dropdown">
+                      <a class="dropdown-toggle" data-toggle="dropdown" href="#">Attendance
+            <span class="caret"></span></a>
+                      <ul class="dropdown-menu">
+                          <li><a href="senate_house-attendance-starter-page.html">Senate</a></li>
+                          <li><a href="house-attendance-statistics.html">House</a></li>
+                      </ul>
+                  </li>
+
+                  <li class="dropdown">
+                      <a class="dropdown-toggle" data-toggle="dropdown" href="#">Loyalty
+            <span class="caret"></span></a>
+                      <ul class="dropdown-menu">
+                          <li class="active"><a href="senate_house-party-loyalty-starter-page.html">Senate</a></li>
+                          <li><a href="house-party-loyalty.html">House</a></li>
+                      </ul>
+                      </li>
+
+              </ul>
+          </div>
+      </nav>        
+
+
+        <header>
+            <div>
+            </div>
+        </header>
+        <!--Table container-->
+        <div>
+            <h2>Party Loyalty</h2>
+            <p>Those who consider themselves to be strong partisans, strong Democrats and strong Republicans respectively, tend to be the most faithful in voting for their party's nominee for office and legislation that backs their party's agenda. </p>
+
+            <h2>Senate at a glance</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Party</th>
+                        <th>Number of Reps</th>
+                        <th>% Voted with Prty</th>
+                    </tr>
+                </thead>
+               <tbody>
+                    <tr id="TRR">
+                        <td>Republican</td>
+
+                    </tr>
+                    <tr id="TRD">
+                        <td>Democrat</td>
+
+                    </tr>
+                    <tr id="TRI">
+                        <td>Independent</td>
+
+                    </tr>
+                </tbody>
+            </table>
+
+            <h2>Least Loyal (Bottom 10% of Party)</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Number Party Votes</th>
+                        <th>% Party Votes</th>
+                    </tr>
+                </thead>
+                <tbody id="least-loyal">
+                </tbody>
+            </table>
+
+            <h2>Most Loyal (Top 10% of Party)</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Number Party Votes</th>
+                        <th>% Party Votes</th>
+                    </tr>
+                </thead>
+                <tbody id="most-loyal">
+                </tbody>
+            </table>
+
+    	</div>
+	<script src="https://unpkg.com/vue/dist/vue.js"></script>
+	<script src="pro-congress-113-senate.js"></script>
+	<script src="statistics.js"></script>
+</body>
+</html>

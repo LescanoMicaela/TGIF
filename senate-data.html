@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	<link rel="stylesheet" href="styles/style.css">
+</head>
+
+<!--
+
+		
+				<form >
+               		<input type="checkbox" id="R" name="party" value="R" @click="filter">Republican
+                	<input type="checkbox" id="D" name="party" value="D" @click="filter">Democrat
+                	<input type="checkbox" id="I" name="party" value="I" @click="filter">Independent
+                </form>
+                <select id="states" name="state" @click="filter">
+					<option v-for="state in states">{{ state }}</option>
+				</select>
+-->
+
+
+<body>
+	<div class="container" id="app">
+		<div id="senate"></div>
+		<div class="content-fluid">
+			<div class="content1">
+				<div class="logo">
+					<img class="img-responsive" src="images/flag-united-states.png" alt="logo TGIF" width="400px">
+				</div>
+				<div class="email">
+					<p> &#9993 <a href="mailto:info@tgif.net">info@tgif.net</a> </p>
+
+				</div>
+
+
+			</div>
+			<nav class="navbar navbar-inverse">
+				<div class="container-fluid">
+
+					<ul class="nav navbar-nav">
+						<li><a class="pad" href="index.html">Home</a></li>
+						<li class="dropdown">
+							<a class="dropdown-toggle" data-toggle="dropdown" id="active" href="#">
+                                <span class="categry">Congress 113</span>
+                                <span class="activeDrop">Senate</span>
+                  <span class="caret"></span>
+                            </a>
+							<ul class="dropdown-menu">
+								<!--                                <li><a href="senate-data.html">Senate</a></li>-->
+								<li><a href="house-data.html">House</a></li>
+							</ul>
+						</li>
+						<li class="dropdown">
+							<a class="pad" class="dropdown-toggle" data-toggle="dropdown" href="#">Attendance
+                  <span class="caret"></span></a>
+							<ul class="dropdown-menu">
+								<li><a href="senate-attendance.html">Senate</a></li>
+								<li><a href="house-attendance.html">House</a></li>
+							</ul>
+						</li>
+
+						<li class="dropdown">
+							<a class="dropdown-toggle" data-toggle="dropdown" href="#">Loyalty
+                  <span class="caret"></span></a>
+							<ul class="dropdown-menu">
+								<li class="active"><a href="senate-loyalty.html">Senate</a></li>
+								<li><a href="house-loyalty.html">House</a></li>
+							</ul>
+						</li>
+
+					</ul>
+				</div>
+			</nav>
+
+
+			<div class="container-fluid">
+
+				<div class="row">
+					<div class="col-sm-8">
+						<h2>Senators</h2>
+						<p>First convened in 1789, the composition and powers of the Senate are established in Article One of the U.S. Constitution. Each state is represented by two senators, regardless of population, who serve staggered six-year terms. The Senate has several exclusive powers not granted to the House, including consenting to treaties as a precondition to their ratification and consenting to or confirming appointments of Cabinet secretaries, federal judges, other federal executive officials, military officers, regulatory officials, ambassadors, and other federal uniformed officers, as well as trial of federal officials impeached by the House.</p>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-sm-12">
+						<div class='filters'>
+							<div>
+								<input type="checkbox" id="R" name="party" value="R" @click="filter">Republican
+								<input type="checkbox" id="D" name="party" value="D" @click="filter">Democrat
+								<input type="checkbox" id="I" name="party" value="I" @click="filter">Independent
+							</div>
+							<div>
+								<select id="stateselect" name="state" @click="filter">
+									<option v-for="state in states">{{ state }}</option>
+								</select>
+							</div>
+						</div>
+						
+						<div class="searchBar">
+							<input @keyUp='filter' type="text" id="inputSearch" autofocus placeholder="Search by name..">
+						</div>
+
+
+						<table id='table-data' class="table table-striped">
+							<thead>
+								<tr id='table-head'>
+									<td>Senator</td>
+									<td>Party Afilation</td>
+									<td>State</td>
+									<td>Seniority</td>
+									<td>Loyalty</td>
+								</tr>
+							</thead>
+							<tbody id="data-tbody">
+								<tr v-for="member in members">
+									<td>
+										<a :href="member.url">{{getFullName(member)}}</a>
+									</td>
+									<td>{{ member.party }}</td>
+									<td>{{ member.state }}</td>
+									<td>{{member.seniority }}</td>
+									<td> {{ member.votes_with_party_pct }} %</td>
+								</tr>
+							</tbody>
+						</table>
+
+						<div v-if='loading' class="loadingDiv" class="center-block"> 
+							<img id="#wait" src="images/Spinner-1s-200px.gif">
+						</div>
+
+						<div v-if='results' class="noResults">No results</div>
+						<a href="#top"><img id="toTop" src="images/backtotop-1.png" alt="back to top"></a>
+					</div>
+				</div>
+			</div>
+			<div class="panel panel-default">
+				<div class="panel-footer">
+					<p> &copy; 2016 TGIF | All rights reserved</p>
+				</div>
+
+
+
+
+			</div>
+		</div>
+	</div>
+
+	<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+	<script src="scripts/maindata.js"></script>
+</body>
+
+</html>
