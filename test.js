@@ -1,1 +1,0 @@
-var members = data.results[0].members;

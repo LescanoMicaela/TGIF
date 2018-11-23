@@ -6,9 +6,6 @@ var app = new Vue({
 		states: ["ALL"],
 		chamber: "",
 		fullName: "",
-		R: "R",
-		D: "D",
-		I: "I",
 		filterByNameMembers :[],
 		loading: true,
 		results: false
@@ -52,10 +49,13 @@ var app = new Vue({
 		},
 
 		getFullName: function (member) {
-			return member.first_name + " " + (member.middle_name || " ") + member.last_name;
+			var middle = (member.middle_name != null ? member.middle_name : " ")
+
+			return member.first_name + " " + (middle + " " ) + member.last_name;
 		},
 
 		filter: function () {
+			this.results = false;
 			this.members = this.allMembers;
 			var input = document.getElementById("inputSearch");;
 			var states = document.getElementById("stateselect").value

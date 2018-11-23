@@ -1,129 +1,183 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
 
-    </head>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	<link href="styles/style.css" rel="stylesheet">
+	<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+	<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.10.16/fh-3.1.3/datatables.min.css">
+</head>
 
-    <body data-id="senate">
+<body>
+	<div class="house-loyalty">
 		<div class="container" id="app">
-      <nav class="navbar navbar-inverse" >
-          <div class="container-fluid">
+			<div id="house" class="content-fluid">
+				<div class="content1">
+					<div class="logo">
+						<img class="img-responsive" src="images/flag-united-states.png" alt="logo TGIF" width="400px">
+					</div>
+					<div class="email">
+						<p> &#9993 <a href="mailto:info@tgif.net">info@tgif.net</a> </p>
 
-              <ul class="nav navbar-nav">
-                  <li class="active"><a class="activea" href="index.html">Home</a></li>
-                  <li class="dropdown">
-                      <a class="dropdown-toggle" data-toggle="dropdown" href="#">Congress 113
-            <span class="caret"></span></a>
-                      <ul class="dropdown-menu">
-                          <li><a href="senate-data.html">Senate</a></li>
-                          <li><a href="house-data.html">House</a></li>
-                      </ul>
-                  </li>
-                  <li class="dropdown">
-                      <a class="dropdown-toggle" data-toggle="dropdown" href="#">Attendance
-            <span class="caret"></span></a>
-                      <ul class="dropdown-menu">
-                          <li><a href="senate_house-attendance-starter-page.html">Senate</a></li>
-                          <li><a href="house-attendance-statistics.html">House</a></li>
-                      </ul>
-                  </li>
-
-                  <li class="dropdown">
-                      <a class="dropdown-toggle" data-toggle="dropdown" href="#">Loyalty
-            <span class="caret"></span></a>
-                      <ul class="dropdown-menu">
-                          <li class="active"><a href="senate_house-party-loyalty-starter-page.html">Senate</a></li>
-                          <li><a href="house-party-loyalty.html">House</a></li>
-                      </ul>
-                      </li>
-
-              </ul>
-          </div>
-      </nav>       
+					</div>
 
 
-        <header>
-            <div>
-            </div>
-        </header>
-        <!--Table container-->
-        <div>
-            <h2>Attendance</h2>
-            <p>The Constitution specifies that a majority of members constitutes a quorum to do business in each house. Representatives and senators rarely force the presence of a quorum by demanding quorum calls; thus, in most cases, debates continue even if a majority is not present.</p>
+				</div>
 
-            <p>The Senate uses roll-call votes; a clerk calls out the names of all the senators, each senator stating "aye" or "no" when his or her name is announced. The House reserves roll-call votes for the most formal matters, as a roll-call of all 435 representatives takes quite some time; normally, members vote by electronic device. In the case of a tie, the motion in question fails. In the Senate, the Vice President may (if present) cast the tiebreaking vote.</p>
+				<nav class="navbar navbar-inverse">
+					<div class="container-fluid">
 
-            <h2>Senate at a glance</h2>
-            <table>
-                <thead>
-                    <tr>
-                        <th>Party</th>
-                        <th>Number of Reps</th>
-                        <th>% Voted with Prty</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>Republican</td>
-						<td>{{ numberRepublicans }}</td>
-						<td>{{getAvg(republicansVotes)}}</td>
-                    </tr>
-                    <tr id="TRD">
-                        <td>Democrat</td>
-						<td>{{ numberDemocrats }}</td>
-						<td>{{getAvg(democratsVotes)}}</td>
-                    </tr>
-                    <tr id="TRI">
-                        <td>Independent</td>
-						<td>{{ numberIndependents }}</td>
-						<td>{{ "/" }}</td>
-                    </tr>
-                </tbody>
-            </table>
+						<ul class="nav navbar-nav">
+							<li><a href="index.html">Home</a></li>
+							<li class="dropdown">
+								<a class="dropdown-toggle" data-toggle="dropdown" href="#">Congress 113
+                  <span class="caret"></span></a>
+								<ul class="dropdown-menu">
+									<li><a href="senate-data.html">Senate</a></li>
+									<li><a href="house-data.html">House</a></li>
+								</ul>
+							</li>
+							<li class="dropdown">
+								<a class="dropdown-toggle" data-toggle="dropdown" id="active" href="#"><span class="categry">Attendance</span><span class="activeDrop">Senate</span>
+                  <span class="caret"></span></a>
+								<ul class="dropdown-menu">
+									<li><a href="house-attendance.html">House</a></li>
+								</ul>
+							</li>
 
-            <h2>Least Engaged (Bottom 10% Attendance)</h2>
-            <table>
-                <thead>
-                    <tr>
-                        <th>Name</th>
-                        <th>Number of Missed Votes</th>
-                        <th>% Missed</th>
-                    </tr>
-                </thead>
-                <tbody id="least-engaged">
-     				<tr v-for='member in leastEngaged'>
-						<td>
-							<a :href="member.url">{{ getFullName(member)}}</a>
-						</td>
-						<td>{{ member.missed_votes }}</td>
-						<td>{{ member.missed_votes_pct }}</td>
-					</tr>
-                </tbody>
-            </table>
+							<li class="dropdown">
+								<a class="dropdown-toggle" data-toggle="dropdown" href="#">Loyalty
+                  				<span class="caret"></span></a>
+								<ul class="dropdown-menu">
+									<li><a href="senate-loyalty.html">Senate</a></li>
+									<li><a href="house-loyalty.html">House</a></li>
+								</ul>
+							</li>
 
-            <h2>Most Engaged (Top 10% Attendance)</h2>
-            <table>
-                <thead>
-                    <tr>
-                        <th>Name</th>
-                        <th>Number of Missed Votes</th>
-                        <th>% Missed</th>
-                    </tr>
-                </thead>
-                <tbody id="most-engaged">
-    				<tr v-for='member in mostEngaged'>
-						<td>
-							<a :href="member.url">{{ getFullName(member)}}</a>
-						</td>
-						<td>{{ member.missed_votes }}</td>
-						<td>{{ member.missed_votes_pct }}</td>
-					</tr>
-                </tbody>
-            </table>
+						</ul>
+					</div>
+				</nav>
+				<div class="container-fluid">
+					<div class="cont1">
+						<div class="cont1-12">
+							<h2>Attendance</h2>
+							<p>The Constitution specifies that a majority of members constitutes a quorum to do business in each house. Representatives and senators rarely force the presence of a quorum by demanding quorum calls; thus, in most cases, debates continue even if a majority is not present.</p>
 
-    	</div>
+							<p>The Senate uses roll-call votes; a clerk calls out the names of all the senators, each senator stating "aye" or "no" when his or her name is announced. The House reserves roll-call votes for the most formal matters, as a roll-call of all 435 representatives takes quite some time; normally, members vote by electronic device. In the case of a tie, the motion in question fails. In the Senate, the Vice President may (if present) cast the tiebreaking vote.</p>
+
+						</div>
+						<div class="cont1-1">
+							<h2 class="left">Senate at a glance</h2>
+							<table class="table" id="show-hide">
+								<thead>
+									<tr>
+										<th>Party</th>
+										<th>Number of Reps</th>
+										<th>% Voted with Prty</th>
+
+									</tr>
+								</thead>
+								<tbody v-if='results'>
+									<tr>
+										<td>Republican</td>
+										<td>{{statistics.numberRepublicans}}</td>
+										<td>{{getAvg(statistics.republicansVotes)}}</td>
+
+									</tr>
+									<tr>
+										<td>Democrat</td>
+										<td>{{statistics.numberDemocrats}}</td>
+										<td>{{getAvg(statistics.democratsVotes)}}</td>
+
+									</tr>
+									<tr>
+										<td>Independent</td>
+										<td>{{statistics.numberIndependents}}</td>
+										<td>/</td>
+									</tr>
+									<tr>
+										<td>Total</td>
+										<td>{{statistics.numberDemocrats + statistics.numberRepublicans + statistics.numberIndependents }}</td>
+										<td>/</td>
+									</tr>
+								</tbody>
+							</table>
+							<div v-if='!results' class="loadingDiv" class="center-block">
+								<img id="#wait" src="images/Spinner-1s-200px.gif">
+							</div>
+						</div>
+					</div>
+					<div class="cont2">
+						<div class="cont1-1">
+
+							<h2 class="cont1-13">Least Engaged (Bottom 10%)</h2>
+							<table class="table" id="least">
+								<thead class="center">
+									<tr>
+										<th>Name</th>
+										<th>Number Party Votes</th>
+										<th>% Party Votes</th>
+									</tr>
+								</thead>
+								<tbody id="least-loyal">
+									<div v-if='loading' class="loadingDiv" class="center-block">
+										<img id="#wait" src="images/Spinner-1s-200px.gif">
+									</div>
+									<tr v-for="member in statistics.leastEngaged">
+										<td>
+											<a :href="member.url">{{getFullName(member)}}</a>
+										</td>
+										<td>{{member.total_votes }}</td>
+										<td> {{ member.missed_votes_pct }} %</td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+						<div class="cont1-1">
+							<h2 class="cont1-13">Most Engaged (Top 10%)</h2>
+							<table class="table" id="most">
+								<thead class="center">
+									<tr>
+										<th>Name</th>
+										<th>Number Party Votes</th>
+										<th>% Party Votes</th>
+									</tr>
+								</thead>
+								<tbody id="most-loyal">
+									<tr v-for="member in statistics.mostEngaged">
+										<td>
+											<a :href="member.url">{{getFullName(member)}}</a>
+										</td>
+										<td>{{member.total_votes }}</td>
+										<td> {{ member.missed_votes_pct }} %</td>
+									</tr>
+									<div v-if='loading' class="loadingDiv" class="center-block">
+										<img id="#wait" src="images/Spinner-1s-200px.gif">
+									</div>
+								</tbody>
+							</table>
+							<!--                            <a href="#top"><img id="toTop" src="images/backtotop-1.png" alt="back to top"></a>-->
+						</div>
+					</div>
+					<div class="panel panel-default">
+						<div class="panel-footer">
+							<p> &copy; 2016 TGIF | All rights reserved</p>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+
+
+
 	</div>
-	 <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
-     <script src="statisticsvue.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	<script src="https://unpkg.com/vue/dist/vue.js"></script>
+	<script src="scripts/statisticsvue.js"></script>
 </body>
+
 </html>
