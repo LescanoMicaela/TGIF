@@ -25,7 +25,7 @@ var app = new Vue({
 			}
 		},
 		getData: function (chamber) {
-			fetch("https://api.propublica.org/congress/v1/113/" + chamber + "/members.json", {
+			fetch("https://api.propublica.org/congress/v1/113/" + this.chamber + "/members.json", {
 				method: "GET",
 				headers: {
 					'X-API-Key': 'aV58nB7F64h3FlIA3ivirUIQSXuTljDVvHZ8qXzB'
@@ -37,7 +37,6 @@ var app = new Vue({
 			}).then(function (json) {
 				app.loading = false;
 				app.members = json.results[0].members;
-				console.log(app.members)
 				app.allMembers = json.results[0].members;
 				app.getStates();
 
@@ -51,7 +50,7 @@ var app = new Vue({
 		getFullName: function (member) {
 			var middle = (member.middle_name != null ? member.middle_name : " ")
 
-			return member.first_name + " " + (middle + " " ) + member.last_name;
+			return `${member.first_name} ${middle} ${member.last_name}`;
 		},
 
 		filter: function () {
@@ -78,16 +77,14 @@ var app = new Vue({
 
 		getStates: function () {
 			var allStates = ["ALL"];
-			for (var i = 0; i < this.members.length; i++) {
-				if (allStates.indexOf(this.members[i].state) === -1) {
-					allStates.push(this.members[i].state)
+			this.allMembers.map(function(member){
+				console.log(member)
+				if (allStates.indexOf(member.state) === -1) {
+					allStates.push(member.state);
 				}
-
-			}
+		})
 			this.states = allStates;
-		},
-
-	
-	}
+			}
+		}
 
 })

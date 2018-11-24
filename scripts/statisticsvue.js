@@ -51,8 +51,8 @@ var app = new Vue({
 				app.members = json.results[0].members;
 				console.log(app.members)
 				app.allMembers = json.results[0].members;
-				app.getNumberofMembersInEachParty("R", app.Rmembers, "numberIndependents")
-				app.getNumberofMembersInEachParty("I", app.Imembers, "numberRepublicans")
+				app.getNumberofMembersInEachParty("R", app.Rmembers, "numberRepublicans")
+				app.getNumberofMembersInEachParty("I", app.Imembers, "numberIndependents")
 				app.getNumberofMembersInEachParty("D", app.Dmembers, "numberDemocrats")
 				app.makeArrayOfVotes(app.Dmembers, "democratsVotes")
 				app.makeArrayOfVotes(app.Rmembers, "republicansVotes");
@@ -71,17 +71,18 @@ var app = new Vue({
 		getFullName: function (member) {
 			var middle = (member.middle_name != null ? member.middle_name : " ")
 
-			return member.first_name + " " + (middle + " " ) + member.last_name;
+			return `${member.first_name} ${middle} ${member.last_name}`;
 		},
 
 		getNumberofMembersInEachParty: function (party, partyArray, lenghtarr) {
-			for (var i = 0; i < this.members.length; i++) {
-				if (this.members[i].party == party) {
-					partyArray.push(this.members[i])
+			this.members.map(function(member){
+				if (member.party == party) {
+					partyArray.push(member)
 
 				}
-			}
+			})
 			this.statistics[lenghtarr] = partyArray.length;
+				
 		},
 
 		getAvg: function (arr) {
@@ -89,12 +90,12 @@ var app = new Vue({
 
 		},
 		makeArrayOfVotes: function (arr, arrPCT) {
-			for (var i = 0; i < arr.length; i++) {
-				this.statistics[arrPCT].push(arr[i].votes_with_party_pct)
+			arr.map(function(ar){
+				app.statistics[arrPCT].push(ar["votes_with_party_pct"])		
+			})
 				this.statistics[arrPCT].sort(function (a, b) {
 					return b - a
 				});
-			}
 		},
 		sortArr: function (arr, keyToSort) {
 			return arr.sort(function (a, b) {
